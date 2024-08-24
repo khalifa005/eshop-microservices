@@ -1,6 +1,8 @@
 var builder = WebApplication.CreateBuilder(args);
-var app = builder.Build();
+//before building the app - add services to DI containers
 
-app.MapGet("/", () => "Hello World!");
+var app = builder.Build();
+//Configure HTTP request pipline 
+
 
 app.Run();
