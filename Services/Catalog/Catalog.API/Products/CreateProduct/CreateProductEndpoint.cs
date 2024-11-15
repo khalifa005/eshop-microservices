@@ -1,4 +1,5 @@
 using BuildingBlocks.CQRS;
+using FluentValidation;
 
 namespace Catalog.API.Products.CreateProduct
 {
@@ -11,6 +12,7 @@ namespace Catalog.API.Products.CreateProduct
   string ImageFile,
   decimal Price);
 
+  
   public record CreateProductResponse(Guid Id);
   public class CreateProductEndpoint : ICarterModule
   {

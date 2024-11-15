@@ -1,5 +1,8 @@
 
 
+using FluentValidation;
+using Microsoft.Extensions.Logging;
+
 namespace Catalog.API.Products.CreateProduct
 {
   public record CreateProductCommand(
@@ -10,12 +13,24 @@ namespace Catalog.API.Products.CreateProduct
     string ImageFile,
     decimal Price) : ICommand<CreateProductResult>;
 
+  public class CreateProductCommandValidator : AbstractValidator<CreateProductCommand>
+  {
+    public CreateProductCommandValidator()
+    {
+      RuleFor(x => x.Name).NotEmpty().WithMessage("name is required");
+      RuleFor(x => x.ImageFile).NotEmpty().WithMessage("image is required");
+      RuleFor(x => x.Category).NotEmpty().WithMessage("category is required");
+      RuleFor(x => x.Price).GreaterThan(0).WithMessage("price is required");
+    }
+  }
+
   public record CreateProductResult(Guid Id);
 
-  internal class CreateProductCommandHandler(IDocumentSession session) : ICommandHandler<CreateProductCommand, CreateProductResult>
+  internal class CreateProductCommandHandler(IDocumentSession session, ILogger<CreateProductCommandHandler> logger) : ICommandHandler<CreateProductCommand, CreateProductResult>
   {
     public async Task<CreateProductResult> Handle(CreateProductCommand command, CancellationToken cancellationToken)
     {
+      logger.LogInformation("CreateProductCommandHandler.handle");
       var entity = new Product()
       {
         Name = command.Name,
