@@ -3,11 +3,6 @@ using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BuildingBlocks.Exceptions.Handler;
 
@@ -75,29 +70,3 @@ public class CustomExceptionHandler
   }
 }
 
-public class InternalServerException : Exception
-{
-  public InternalServerException(string message) : base(message)
-  {
-  }
-
-  public InternalServerException(string message, string details) : base(message)
-  {
-    Details = details;
-  }
-
-  public string? Details { get; }
-}
-public class BadRequestException : Exception
-{
-  public BadRequestException(string message) : base(message)
-  {
-  }
-
-  public BadRequestException(string message, string details) : base(message)
-  {
-    Details = details;
-  }
-
-  public string? Details { get; }
-}
