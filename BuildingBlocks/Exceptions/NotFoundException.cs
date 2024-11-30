@@ -1,20 +1,20 @@
-//using System;
-//using System.Collections.Generic;
-//using System.Linq;
-//using System.Text;
-//using System.Threading.Tasks;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-//namespace BuildingBlocks.Exception;
-////public class NotFoundException : Exception
-////{
-////  public NotFoundException(string message) : base(message)
-////  {
-////  }
+namespace BuildingBlocks.Exceptions;
+public class NotFoundException : System.Exception
+{
+  public NotFoundException(string message) : base(message)
+  {
+  }
 
-////  public NotFoundException(string name, object key) : base($"Entity \"{name}\" ({key}) was not found.")
-////  {
-////  }
-////}
+  public NotFoundException(string name, object key) : base($"Entity \"{name}\" ({key}) was not found.")
+  {
+  }
+}
 
 //public class CustomExceptionHandler
 //    (ILogger<CustomExceptionHandler> logger)
