@@ -16,3 +16,8 @@ depends_on:
 
 
   https://www.udemy.com/course/microservices-architecture-and-implementation-on-dotnet/learn/lecture/42551956#questions/21852622
+
+
+github
+https://github.com/aspnetrun/run-aspnetcore-microservices/tree/master/src/Services/Catalog/Catalog.API
+https://github.com/mehmetozkaya/EShopMicroservices/tree/main/src/Services/Catalog/Catalog.API/Products/CreateProduct
