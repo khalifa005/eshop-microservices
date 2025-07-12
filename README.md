@@ -12,9 +12,10 @@ to override the app settings .json
 containers on the same network can comunicates by  their names 
 depends_on:
   - catalogdb
+  
+last lecture
 
-
-
+https://www.udemy.com/course/microservices-architecture-and-implementation-on-dotnet/learn/lecture/42551956#questions/21852622
   https://www.udemy.com/course/microservices-architecture-and-implementation-on-dotnet/learn/lecture/42551956#questions/21852622
 
 
