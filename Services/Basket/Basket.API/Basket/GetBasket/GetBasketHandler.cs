@@ -1,3 +1,4 @@
+using Basket.API.Data;
 using Basket.API.Models;
 using BuildingBlocks.CQRS;
 
@@ -7,9 +8,16 @@ public record GetBasketQuery(string UserName) : IQuery<GetBasketResult>;
 public record GetBasketResult(ShoppingCart Cart);
 public class GetBasketQueryHandler : IQueryHandler<GetBasketQuery, GetBasketResult>
 {
+  private readonly IBasketRepository _basketRepository;
+  public GetBasketQueryHandler(IBasketRepository basketRepository)
+  {
+    _basketRepository = basketRepository;
+  }
   public async Task<GetBasketResult> Handle(GetBasketQuery query, CancellationToken cancellationToken)
   {
-    var result = new GetBasketResult(new ShoppingCart("query.UserName"));
-    return result;
+    //var result = new GetBasketResult(new ShoppingCart("query.UserName"));
+
+    var basket = await _basketRepository.GetBasket(query.UserName, cancellationToken);
+    return new GetBasketResult(basket);
   }
 }

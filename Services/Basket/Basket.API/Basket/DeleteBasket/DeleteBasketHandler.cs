@@ -1,3 +1,4 @@
+using Basket.API.Data;
 using BuildingBlocks.CQRS;
 using FluentValidation;
 using System.Windows.Input;
@@ -18,13 +19,13 @@ public class DeleteBasketCommandValidator : AbstractValidator<DeleteBasketComman
   }
 }
 
-public class DeleteBasketCommandHandler : ICommandHandler<DeleteBasketCommand, DeleteBasketResult>
+public class DeleteBasketCommandHandler(IBasketRepository basketRepository) : ICommandHandler<DeleteBasketCommand, DeleteBasketResult>
 {
   public async Task<DeleteBasketResult> Handle(DeleteBasketCommand command, CancellationToken cancellationToken)
   {
     //TODO delete basket from database and cache
-
-    return new DeleteBasketResult(true);
+    var result = await basketRepository.DeleteBasket(command.Username, cancellationToken);
+    return new DeleteBasketResult(result);
 
 
   }

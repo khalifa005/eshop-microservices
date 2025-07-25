@@ -1,3 +1,4 @@
+using Basket.API.Data;
 using Basket.API.Models;
 using BuildingBlocks.CQRS;
 using FluentValidation;
@@ -20,16 +21,15 @@ public class StoreBasketCommandValidator : AbstractValidator<StoreBasketCommand>
         .WithMessage("UserName cannot be empty");
   }
 }
-public class StoreBasketCommandHandler : ICommandHandler<StoreBasketCommand, StoreBasketResult>
+public class StoreBasketCommandHandler(IBasketRepository basketRepository) : ICommandHandler<StoreBasketCommand, StoreBasketResult>
 {
   public async Task<StoreBasketResult> Handle(StoreBasketCommand command, CancellationToken cancellationToken)
   {
     ShoppingCart cart = command.Cart;
 
-
-    //TODO: Logic to store the basket
+    var basket = await basketRepository.StoreBasket(command.Cart, cancellationToken);
     //TODO:update cache 
-    return new StoreBasketResult("khalifa");
+    return new StoreBasketResult(basket.UserName);
   }
 }
 
