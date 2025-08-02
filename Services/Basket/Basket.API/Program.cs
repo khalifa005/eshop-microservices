@@ -40,9 +40,18 @@ builder.Services.AddMarten(opt =>
       .Identity(x => x.UserName);
 }).UseLightweightSessions();
 
+builder.Services.AddHealthChecks()
+  .AddNpgSql(builder.Configuration.GetConnectionString("Database"))
+  .AddRedis(builder.Configuration.GetConnectionString("Redis"))
+  ;
 
 var app = builder.Build();
 
 app.MapCarter();
 app.UseExceptionHandler(options => { });
+app.UseHealthChecks("/health",
+  new Microsoft.AspNetCore.Diagnostics.HealthChecks.HealthCheckOptions()
+  {
+    ResponseWriter = HealthChecks.UI.Client.UIResponseWriter.WriteHealthCheckUIResponse
+  });
 app.Run();
